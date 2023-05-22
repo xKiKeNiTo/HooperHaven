@@ -1,0 +1,14 @@
+<div class="flex justify-content-center">
+    <p-card header="{{ product.name }}" subheader="{{ product.price }}€" [style]="{ width: '600px' }"
+        class="flex justify-content-center col-12">
+        <ng-template pTemplate="header">
+            <img [src]="'assets/products/' + product._id + '.jpg'" [alt]="product.name" class="border-round" />
+        </ng-template>
+        <p>
+            {{ product.description }}
+        </p>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-shopping-cart" styleClass="p-button-rounded" (click)="addToCart()"></p-button>
+        </ng-template>
+    </p-card>
+</div>

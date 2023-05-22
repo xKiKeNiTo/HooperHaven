@@ -1,0 +1,50 @@
+<div>
+    <p-menubar [model]="items">
+
+        <ng-template pTemplate="start">
+    
+            <img src="https://www.shareicon.net/data/2015/09/08/97745_basketball_512x512.png" height="40" class="mr-2"
+                routerLink="..">
+    
+        </ng-template>
+    
+        <ng-template pTemplate="end">
+            <div class="flex align-items-center">
+    
+                <p-button label="" styleClass="p-button-rounded p-button-text" (onClick)="redirect()">
+                    <i class="pi pi-user"></i>
+                </p-button>
+    
+                <p-button label="" styleClass="p-button-rounded p-button-text" routerLink="/core/cart">
+                    <i class="pi pi-shopping-cart"></i>
+                </p-button>
+    
+            </div>
+    
+        </ng-template>
+    
+    </p-menubar>
+    
+    <br>
+    
+    <router-outlet></router-outlet>
+    
+    <br>
+    
+    <p-menubar class="flex justify-content-center">
+        <div class="flex justify-content-center">
+            <a href="#" class="flex align-items-center mr-2">
+                <i class="pi pi-phone"></i>
+            </a>
+            <a href="#" class="flex align-items-center mr-2">
+                <i class="pi pi-envelope"></i>
+            </a>
+            <a href="#" class="flex align-items-center mr-2">
+                <i class="pi pi-instagram"></i>
+            </a>
+            <a href="#" class="flex align-items-center">
+                <i class="pi pi-facebook"></i>
+            </a>
+        </div>
+    </p-menubar>
+</div>
