@@ -5,8 +5,8 @@ import { HomeComponent } from './pages/home/home.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductInfoComponent } from './pages/product-info/product-info.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -16,8 +16,8 @@ const routes: Routes = [
       { path: "home", component: HomeComponent },
       { path: "cart", component: CartComponent, canActivate: [AuthGuard] },
       { path: "product-list", component: ProductListComponent },
-      { path: "profile", component: ProfileComponent },
       { path: "product-info/:id", component: ProductInfoComponent },
+      { path: "profile", component: ProfileComponent },
       { path: "**", redirectTo: "home" },
       { path: ":id", component: ProductListComponent },
     ]

@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { DataViewModule, DataViewLayoutOptions } from 'primeng/dataview';
 import { CarouselModule } from 'primeng/carousel';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [],
@@ -23,7 +24,8 @@ import { CarouselModule } from 'primeng/carousel';
     InputTextModule,
     DividerModule,
     DataViewModule,
-    CarouselModule
+    CarouselModule,
+    BadgeModule
   ]
 })
 export class PrimeNgModule { }

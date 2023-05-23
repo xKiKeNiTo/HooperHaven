@@ -18,7 +18,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CartComponent,
     ProductListComponent,
     ProductInfoComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

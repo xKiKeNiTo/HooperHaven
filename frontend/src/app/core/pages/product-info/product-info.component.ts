@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from '../../interfaces/product.interface';
 import { CartService } from 'src/app/services/cart.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-info',
@@ -10,8 +10,8 @@ import { CartService } from 'src/app/services/cart.service';
   styles: []
 })
 export class ProductInfoComponent implements OnInit {
-  product: any;
 
+  product: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,27 +20,49 @@ export class ProductInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.route.params.subscribe(params => {
+
       const productId = params['id'];
       this.loadProduct(productId);
+
     });
+
   }
 
   loadProduct(productId: string): void {
+
     this.productService.getProductById(productId)
+
       .subscribe(
+
         data => {
+
           this.product = data;
           console.log(this.product);
+
         },
+
         error => {
+
           console.error(error);
+
         }
+
       );
+
   }
 
-  addToCart(): void {    
-    this.cartService.addToCart(this.product);
+  addToCart(): void {
+    const token = localStorage.getItem('token');
+  
+    if (token) {
+      this.cartService.addToCart(this.product);
+      this.cartService.updateCartItemCount();
+      Swal.fire('Añadido al carrito', '', 'success');
+    } else {
+      Swal.fire('Error', 'Debes iniciar sesión para añadir productos al carrito', 'error');
+    }
   }
 
 }

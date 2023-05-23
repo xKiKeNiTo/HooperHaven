@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 
 import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import Swal from 'sweetalert2';
+import { CartService } from '../../../services/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './layout.component.html',
@@ -12,7 +15,12 @@ export class LayoutComponent {
 
   items: MenuItem[];
 
-  constructor(private router: Router) { this.items = [] }
+  cartItemCount: number = 0;
+
+  constructor(
+    private router: Router,
+    private cartService: CartService
+  ) { this.items = [] }
 
   ngOnInit(): void {
 
@@ -40,6 +48,10 @@ export class LayoutComponent {
         command: () => this.navigateToProductsByCategory('accesorios')
       }
     ];
+    this.cartItemCount = this.cartService.getCartItemCount();
+    this.cartService.cartItemCount$.subscribe(count => {
+      this.cartItemCount = count;
+    });
   }
 
   navigateToProductsByCategory(category: string): void {
@@ -50,16 +62,26 @@ export class LayoutComponent {
 
   public user = computed(() => this.authService.currentUser());
 
-  redirect() {
-    const token = localStorage.getItem('token'); // Obtiene el token del localStorage
+  isLoggedIn(): boolean {
+    const token = localStorage.getItem('token');
     if (token) {
-      // El token existe, por lo tanto el usuario está autenticado
-      console.log(token);
-      this.router.navigate(['/core/profile']); // Redirige al usuario a la página de perfil
+      return true;
+    }
+    return false
+  }
+
+  redirect(): void {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.router.navigate(['/core/profile']);
     } else {
       this.router.navigate(['/auth/login']);
     }
+  }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    Swal.fire('Sesión cerrada', 'Has cerrado sesión exitosamente', 'success');
   }
 
 }

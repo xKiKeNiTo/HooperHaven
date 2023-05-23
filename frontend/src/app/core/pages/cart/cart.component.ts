@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../../interfaces/product.interface';
 import { CartService } from 'src/app/services/cart.service';
-import { HttpClient } from '@angular/common/http';
-import { env } from 'src/environments/env';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -23,14 +21,15 @@ export class CartComponent {
 
   constructor(
     private cartService: CartService,
-    private http: HttpClient
   ) {
-    this.cartProducts = this.cartService.getCartItems();
-
-
+    this.cartProducts = JSON.parse(localStorage.getItem("cartItems") || "[]");
   }
 
   compra() {
+    if (this.cartProducts.length === 0) {
+      return;
+    }
+
     this.data.productsIds = this.cartProducts.map(product => product._id);
 
     if (this.token) {
@@ -46,15 +45,41 @@ export class CartComponent {
     console.log(this.data);
 
     this.cartService.createCompra(this.data)
-    .subscribe(
-      () => {
-        Swal.fire('Compra exitosa', '¡Compra realizada correctamente!', 'success');
-      },
-      (error) => {
-        Swal.fire('Error en la compra', error.message, 'error');
-      }
-    );
+      .subscribe(
+        () => {
+          Swal.fire('Compra exitosa', '¡Compra realizada correctamente!', 'success');
+          localStorage.removeItem('cartItems');
+          this.cartProducts = JSON.parse(localStorage.getItem("cartItems") || "[]");
+          this.cartService.cartItems = [];
+        },
+        (error) => {
+          Swal.fire('Error en la compra', error.message, 'error');
+        }
+      );
   }
+
+  removeFromCart(index: number): void {
+    const removedProduct = this.cartProducts[index];
+    this.cartProducts.splice(index, 1);
+    this.cartService.cartItems = this.cartProducts;
+
+    localStorage.setItem('cartItems', JSON.stringify(this.cartProducts));
+    
+    this.cartService.updateCartItemCount();
+    Swal.fire({
+      icon: 'success',
+      title: 'Producto eliminado',
+      text: `Se ha eliminado ${removedProduct.name} del carrito.`,
+      showConfirmButton: false,
+      timer: 1500
+    });
+
+  }
+
+  getTotalPrice(): number {
+    return this.cartProducts.reduce((total, product) => total + product.price, 0);
+  }
+
 }
 
 

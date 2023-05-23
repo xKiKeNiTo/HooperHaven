@@ -12,19 +12,19 @@ export class AuthGuard implements CanActivate {
 
     canActivate(): boolean {
 
-        const token = localStorage.getItem('jwt');
+        const token = localStorage.getItem('token');
 
-        if (!token) {
-            Swal.fire({
-                title: 'Acceso denegado',
-                text: 'Debes iniciar sesión para acceder al carrito',
-                icon: 'warning',
-                confirmButtonText: 'Iniciar sesión',
-            }).then(() => {
-                this.router.navigate(['/auth/login']);
-            });
-            return false;
+        if (token) {
+            return true;
         }
-        return true;
+        Swal.fire({
+            title: 'Acceso denegado',
+            text: 'Debes iniciar sesión para acceder al carrito',
+            icon: 'warning',
+            confirmButtonText: 'Iniciar sesión',
+        }).then(() => {
+            this.router.navigate(['/auth/login']);
+        });
+        return false;
     }
 }
