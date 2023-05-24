@@ -5,7 +5,6 @@ import { MenuItem } from 'primeng/api';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
 import { CartService } from '../../../services/cart.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   templateUrl: './layout.component.html',
@@ -52,7 +51,13 @@ export class LayoutComponent {
     this.cartService.cartItemCount$.subscribe(count => {
       this.cartItemCount = count;
     });
+
+    if (localStorage.getItem("token")) {
+      this.showLogoutButton = true;
+    }
+
   }
+  showLogoutButton = false;
 
   navigateToProductsByCategory(category: string): void {
     this.router.navigate(['/core/product-list'], { queryParams: { category: category } });
@@ -80,8 +85,10 @@ export class LayoutComponent {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.clear()
+    this.router.navigate(['/core/home']);
     Swal.fire('Sesión cerrada', 'Has cerrado sesión exitosamente', 'success');
+    this.showLogoutButton = false
   }
 
 }

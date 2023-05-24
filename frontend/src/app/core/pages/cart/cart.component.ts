@@ -51,6 +51,8 @@ export class CartComponent {
           localStorage.removeItem('cartItems');
           this.cartProducts = JSON.parse(localStorage.getItem("cartItems") || "[]");
           this.cartService.cartItems = [];
+          localStorage.setItem('cartItems', JSON.stringify(this.cartProducts));
+          this.cartService.updateCartItemCount();
         },
         (error) => {
           Swal.fire('Error en la compra', error.message, 'error');
@@ -64,7 +66,6 @@ export class CartComponent {
     this.cartService.cartItems = this.cartProducts;
 
     localStorage.setItem('cartItems', JSON.stringify(this.cartProducts));
-    
     this.cartService.updateCartItemCount();
     Swal.fire({
       icon: 'success',

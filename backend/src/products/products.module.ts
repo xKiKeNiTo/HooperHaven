@@ -4,6 +4,7 @@ import { ProductsController } from './products.controller';
 import { ProductsService } from './products.service';
 import { Product, ProductSchema } from './entities/product.entity';
 import { ConfigModule } from '@nestjs/config';
+import { Compra, CompraSchema } from '../compras/entities/compra.entity';
 
 @Module({
   controllers: [ProductsController],
@@ -15,7 +16,12 @@ import { ConfigModule } from '@nestjs/config';
     MongooseModule.forFeature([{
       name: Product.name,
       schema: ProductSchema
-    }]),
+    },
+    { 
+      name: Compra.name, 
+      schema: CompraSchema 
+    },
+  ]),
 
   ],
 

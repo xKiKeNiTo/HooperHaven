@@ -9,10 +9,14 @@
         </ng-template>
 
         <ng-template pTemplate="end">
+
             <div class="flex align-items-center">
-                    <p-button styleClass="p-button-rounded p-button-text" icon="pi pi-user" (onClick)="redirect()">
-                    </p-button>
-                <p-button label="" styleClass="p-button-rounded p-button-text"  routerLink="/core/cart">
+                <p-button *ngIf="showLogoutButton" styleClass="p-button-rounded p-button-text" (click)="logout()">
+                    Cerrar sesión
+                </p-button>
+                <p-button styleClass="p-button-rounded p-button-text" icon="pi pi-user" (onClick)="redirect()">
+                </p-button>
+                <p-button label="" styleClass="p-button-rounded p-button-text" routerLink="/core/cart">
                     <i class="pi pi-shopping-cart" pBadge [value]="cartItemCount.toString()"></i>
                 </p-button>
             </div>

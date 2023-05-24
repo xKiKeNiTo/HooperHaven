@@ -1,23 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Request } from '@nestjs/common';
 import { ComprasService } from './compras.service';
 import { CreateCompraDto } from './dto/create-compra.dto';
 import { UpdateCompraDto } from './dto/update-compra.dto';
 
 @Controller('compras')
 export class ComprasController {
-  constructor(private readonly comprasService: ComprasService) {}
+  constructor(private readonly comprasService: ComprasService) { }
 
   @Post()
   create(@Body() createCompraDto: CreateCompraDto) {
     return this.comprasService.createCompra(createCompraDto);
   }
 
+  @Get('byUser/:userId')
+  getComprasByUser(@Param('userId') userId: string) {
+    return this.comprasService.findByUser(userId);
+  }
+
   @Get()
   findAll() {
     return this.comprasService.findAll();
   }
-
-  @Get(':id')
+ 
+  @Get(':id') 
   findOne(@Param('id') id: string) {
     return this.comprasService.findOne(+id);
   }

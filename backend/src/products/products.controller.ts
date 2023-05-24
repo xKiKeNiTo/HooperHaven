@@ -36,6 +36,11 @@ export class ProductsController {
     }
   }
 
+  @Get('user/:userId')
+  getProductsByUserId(@Param('userId') userId: string) {
+    return this.productsService.findByUserId(userId);
+  }
+
   @Get()
   getAllProducts(): Promise<Product[]> {
     return this.productsService.findAll();

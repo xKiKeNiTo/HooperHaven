@@ -1,2 +1,39 @@
-<p>profile works!</p>
-<p-button label="Cerrar sesión" icon="pi pi-power-off" styleClass="p-button-rounded p-button-text"> </p-button>
+<div class="grid">
+    <div class="col-12 flex justify-content-center">
+        <h1>MIS COMPRAS</h1>
+    </div>
+    <div class="md:col-8 xl:col-6 sm:col-8 col-12 mx-auto">
+        <div *ngFor="let compra of comprasConProductos">
+            <p-card>
+                <header class="col-12 flex justify-content-center text-center">
+                    <h1>
+                        {{ compra.compra.fecha | date:'dd MMM yyyy HH:mm':'es' }}
+                    </h1>
+                </header>                 
+                <div>
+                    <div *ngFor="let producto of compra.productos" class="grid">
+                        <div class="col-4 hidden md:inline">
+                            <img class="md:w-7rem xl:w-12rem shadow-2 border-round"
+                                [src]="'assets/products/' + producto._id + '.jpg'" [alt]="producto.name" />
+                        </div>
+                        <div class="md:col-4 xl:col-4 col-12 flex align-items-center justify-content-center">
+                            <p class="text-center">
+                                {{ producto.name }}
+                            </p>
+                        </div>
+                        <div class="md:col-4 xl:col-4 col-12 flex align-items-center justify-content-center">
+                            <p class="text-center underline">
+                                {{ producto.price }}€
+                            </p>
+                        </div>
+                        <p-divider class="col-12"></p-divider>          
+                    </div>
+                </div>
+                <div class="mt-2 flex justify-content-center">
+                    <strong class="underline">Total: {{ calcularTotal(compra.productos) }}€</strong>
+                </div>
+            </p-card>
+            <br>
+        </div>
+    </div>
+</div>

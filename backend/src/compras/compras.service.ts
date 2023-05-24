@@ -8,15 +8,17 @@ import { Model } from 'mongoose';
 @Injectable()
 export class ComprasService {
 
-  constructor(@InjectModel('Compra') private readonly compraModel: Model<Compra>) { }
+  constructor(
+    @InjectModel('Compra') private readonly compraModel: Model<Compra>
+    ) { }
 
   async createCompra(createCompraDto: CreateCompraDto): Promise<Compra> {
     const compra = new this.compraModel(createCompraDto);
     return compra.save();
   }
 
-  create(createCompraDto: CreateCompraDto) {
-    return 'This action adds a new compra';
+  async findByUser(userId: string): Promise<Compra[]> {
+    return this.compraModel.find({ userId: userId }).exec();
   }
 
   findAll() {
@@ -28,7 +30,7 @@ export class ComprasService {
   }
 
   update(id: number, updateCompraDto: UpdateCompraDto) {
-    return `This action updates a #${id} compra`;
+    return `This action updates a #${id} compra`; 
   }
 
   remove(id: number) {
