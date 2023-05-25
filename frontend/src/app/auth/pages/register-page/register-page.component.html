@@ -2,7 +2,7 @@
     <p-card class="flex flex-column justify-content-center card-container">
         <form [formGroup]="form" (ngSubmit)="register()"
             class="flex flex-column justify-content-center align-items-center">
-            <h1>Registro</h1>
+            <h2>Registro</h2>
             <div class="p-field">
                 <span class="p-float-label p-input-icon-right email">
                     <i class="pi pi-envelope"></i>
@@ -17,7 +17,7 @@
                     <label for="password">Contraseña</label>
                 </span>
             </div>
-            <p-button label="Entrar" icon="pi pi-check" iconPos="right" type="submit" [disabled]="form.invalid"
+            <p-button label="Registrarse" icon="pi pi-check" iconPos="right" type="submit" [disabled]="form.invalid"
                 class="mt-4"></p-button>
             <a routerLink="../login">¿Ya tienes una cuenta? Iniciar sesión</a>
         </form>

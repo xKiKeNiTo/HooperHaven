@@ -1,20 +1,20 @@
 <div class="grid">
     <div class="col-12 flex justify-content-center">
-        <h1>MIS COMPRAS</h1>
+        <h2>MIS COMPRAS</h2>
     </div>
     <div class="md:col-8 xl:col-6 sm:col-8 col-12 mx-auto">
         <div *ngFor="let compra of comprasConProductos">
             <p-card>
-                <header class="col-12 flex justify-content-center text-center">
-                    <h1>
+                <div class="col-12 flex justify-content-center text-center">
+                    <h3 class="text-2xl">
                         {{ compra.compra.fecha | date:'dd MMM yyyy HH:mm':'es' }}
-                    </h1>
-                </header>                 
+                    </h3>
+                </div>                 
                 <div>
                     <div *ngFor="let producto of compra.productos" class="grid">
                         <div class="col-4 hidden md:inline">
                             <img class="md:w-7rem xl:w-12rem shadow-2 border-round"
-                                [src]="'assets/products/' + producto._id + '.jpg'" [alt]="producto.name" />
+                                [src]="'assets/products/' + producto._id + '.jpg'" alt="" />
                         </div>
                         <div class="md:col-4 xl:col-4 col-12 flex align-items-center justify-content-center">
                             <p class="text-center">

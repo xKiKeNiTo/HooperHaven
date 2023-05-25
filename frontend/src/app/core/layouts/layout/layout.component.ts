@@ -25,9 +25,9 @@ export class LayoutComponent {
 
     this.items = [
       {
-        label: 'Ropa',
+        label: 'Ropa',      
         items: [
-          {
+          { 
             label: 'Pantalones',
             command: () => this.navigateToProductsByCategory('pantalones')
           },
@@ -54,9 +54,10 @@ export class LayoutComponent {
 
     if (localStorage.getItem("token")) {
       this.showLogoutButton = true;
-    }
+    } 
 
   }
+
   showLogoutButton = false;
 
   navigateToProductsByCategory(category: string): void {
@@ -67,12 +68,11 @@ export class LayoutComponent {
 
   public user = computed(() => this.authService.currentUser());
 
-  isLoggedIn(): boolean {
-    const token = localStorage.getItem('token');
-    if (token) {
-      return true;
+  changeAriaLabelLogin(): string {
+    if (localStorage.getItem('token')) {
+      return "Ir al perfil"
     }
-    return false
+    return "Ir al login"
   }
 
   redirect(): void {

@@ -1,14 +1,15 @@
 <div class="flex justify-content-center">
-    <p-card header="{{ product.name }}" subheader="{{ product.price }}€" [style]="{ width: '600px' }"
-        class="flex justify-content-center col-12">
+    <p-card [style]="{ width: '600px' }" class="flex justify-content-center col-12">
+        <h2>{{ product.name }}</h2>
+        <h3>{{ product.price }}€</h3>
         <ng-template pTemplate="header">
-            <img [src]="'assets/products/' + product._id + '.jpg'" [alt]="product.name" class="border-round" />
+            <img [src]="'assets/products/' + product._id + '.jpg'" alt="" class="border-round" />
         </ng-template>
         <p>
             {{ product.description }}
         </p>
         <ng-template pTemplate="footer">
-            <p-button icon="pi pi-shopping-cart" styleClass="p-button-rounded" (click)="addToCart()"></p-button>
+            <p-button icon="pi pi-shopping-cart" styleClass="p-button-rounded" (click)="addToCart()" ariaLabel="Añadir producto al carrito"></p-button>
         </ng-template>
     </p-card>
 </div>

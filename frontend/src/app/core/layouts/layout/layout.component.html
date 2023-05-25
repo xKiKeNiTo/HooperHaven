@@ -1,10 +1,10 @@
-<div>
-    <p-menubar [model]="items">
+<header>
+    <p-menubar role="menú principal" [model]="items">
 
         <ng-template pTemplate="start">
 
             <img src="https://www.shareicon.net/data/2015/09/08/97745_basketball_512x512.png" height="40" class="mr-2"
-                routerLink="..">
+                routerLink=".." alt="Logo Hooper Haven">
 
         </ng-template>
 
@@ -14,7 +14,8 @@
                 <p-button *ngIf="showLogoutButton" styleClass="p-button-rounded p-button-text" (click)="logout()">
                     Cerrar sesión
                 </p-button>
-                <p-button styleClass="p-button-rounded p-button-text" icon="pi pi-user" (onClick)="redirect()">
+                <p-button styleClass="p-button-rounded p-button-text" icon="pi pi-user" (onClick)="redirect()"
+                    [attr.aria-label]="changeAriaLabelLogin()">
                 </p-button>
                 <p-button label="" styleClass="p-button-rounded p-button-text" routerLink="/core/cart">
                     <i class="pi pi-shopping-cart" pBadge [value]="cartItemCount.toString()"></i>
@@ -23,27 +24,32 @@
         </ng-template>
 
     </p-menubar>
+</header>
 
-    <br>
+<br>
 
+<main>
     <router-outlet></router-outlet>
+</main>
 
-    <br>
 
-    <p-menubar class="flex justify-content-center">
+<br>
+
+<footer>
+    <p-card>
         <div class="flex justify-content-center">
-            <a href="#" class="flex align-items-center mr-2">
+            <a title="teléfono" href="#" class="flex align-items-center mr-2">
                 <i class="pi pi-phone"></i>
             </a>
-            <a href="#" class="flex align-items-center mr-2">
+            <a title="correo"  href="#" class="flex align-items-center mr-2">
                 <i class="pi pi-envelope"></i>
             </a>
-            <a href="#" class="flex align-items-center mr-2">
+            <a title="instagram"  href="#" class="flex align-items-center mr-2">
                 <i class="pi pi-instagram"></i>
             </a>
-            <a href="#" class="flex align-items-center">
+            <a title="facebook"  href="#" class="flex align-items-center">
                 <i class="pi pi-facebook"></i>
             </a>
         </div>
-    </p-menubar>
-</div>
+    </p-card>
+</footer>

@@ -2,7 +2,7 @@
     <p-card class="flex flex-column justify-content-center card-container">
         <form [formGroup]="form" (ngSubmit)="login()"
             class="flex flex-column justify-content-center align-items-center">
-            <h1>Iniciar Sesión</h1>
+            <h2>Iniciar Sesión</h2>
             <div class="p-field">
                 <span class="p-float-label p-input-icon-right email">
                     <i class="pi pi-envelope"></i>
@@ -14,7 +14,7 @@
                 <span class="p-float-label password">
                     <p-password [toggleMask]="true" [feedback]="false" id="password"
                         formControlName="password"></p-password>
-                    <label for="password">Contraseña</label>
+                    <label aria-labelledby="password" for="password">Contraseña</label>
                 </span>
             </div>
             <p-button label="Entrar" icon="pi pi-check" iconPos="right" type="submit" [disabled]="form.invalid"
