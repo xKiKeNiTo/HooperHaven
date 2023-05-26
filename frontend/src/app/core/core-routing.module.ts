@@ -13,13 +13,13 @@ const routes: Routes = [
     path: "",
     component: LayoutComponent,
     children: [
-      { path: "home", component: HomeComponent },
-      { path: "cart", component: CartComponent, canActivate: [AuthGuard] },
-      { path: "product-list", component: ProductListComponent },
-      { path: "product-info/:id", component: ProductInfoComponent },
-      { path: "profile", component: ProfileComponent },
+      { path: "home", component: HomeComponent, title: "Hooper Haven - Página principal" },
+      { path: "cart", component: CartComponent, canActivate: [AuthGuard],  title: "Hooper Haven - Carrito" },
+      { path: "product-list", component: ProductListComponent, title: "Hooper Haven - Lista de productos" },
+      { path: "product-info/:id", component: ProductInfoComponent, title: "Hooper Haven - Detalles del producto" },
+      { path: "profile", component: ProfileComponent, title: "Hooper Haven - Histórico de compras" },
       { path: "**", redirectTo: "home" },
-      { path: ":id", component: ProductListComponent },
+      { path: ":id", component: ProductListComponent},
     ]
   }
 
